@@ -9,15 +9,15 @@ export default function PreviewUi({ currentRef, formData }) {
         <div className="">
           {formData.logo && (
             <div className="flex justify-center">
-            <img
-              src={formData.logo}
-              alt="logo"
-              className="mb-4 w-[80.7px] h-[89.34px]"
-            />
-          </div>
+              <img
+                src={formData.logo}
+                alt="logo"
+                className="mb-4 w-[80.7px] h-[89.34px]"
+              />
+            </div>
           )}
           <h1
-            className="text-center font-bold  text-8xl text-orange-500"
+            className="text-center font-bold  text-3xl md:text-8xl text-orange-500"
             // data-html2canvas-ignore
           >
             {formData.institutionName}
@@ -27,21 +27,21 @@ export default function PreviewUi({ currentRef, formData }) {
           </h3>
 
           <div className="text-center my-4">
-            <h1 className="font-bold text-6xl  text-[#53514F] border-b-4 border-[#64696A] inline-block">
+            <h1 className="font-bold text-3xl md:text-6xl  text-[#53514F] border-b-4 border-[#64696A] inline-block">
               {formData.studentName}
             </h1>
           </div>
 
-          <p className="text-center text-xl font-normal">
+          <p className="text-center text-sm md:text-xl font-normal">
             Has completed a six months program in frontend development with
             emphasis on React
           </p>
 
           <h4 className="text-center text-xl py-5">{formData.dateOfIssue}</h4>
-          <p className="text-center">{formData.programStatement}</p>
+          <p className="text-center ">{formData.programStatement}</p>
           {/* signatures */}
 
-          <div className="grid grid-cols-3 gap-4 mt-8 items-center justify-items-center  px-[20px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 items-center justify-items-center   px-[20px]">
             {formData.ceoSignature && (
               <div className="text-center">
                 <img
