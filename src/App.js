@@ -1,15 +1,27 @@
-import UploadLogo from "./component/certificateGen/page";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom"; // Ensure RouterProvider is imported
 import CertificateGen from "./component/certificateGen/page";
-import CertificateWork from "./component/leard3/page";
-
-
+import ShowingPrev from "./routes/ShowPreview";
+import ContextData from "./component/contextCom/page";
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route path="/" element={<CertificateGen />} />
+        <Route path="/showPrev" element={<ShowingPrev />} />
+      </>
+    )
+  );
+
   return (
-    <div className="App">
-    <CertificateGen />
-  {/* <CertificateWork /> */}
-    </div>
+    <ContextData>
+      <RouterProvider router={router} />
+    </ContextData>
   );
 }
 

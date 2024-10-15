@@ -1,31 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PiArrowFatLineUpBold } from "react-icons/pi";
 import { GoHash } from "react-icons/go";
 import PreviewUi from "../previewComp/page";
+import { useNavigate } from "react-router-dom";
+import { MyContextData } from "../contextCom/page";
 
-export default function InputComp({
-  setFormData,
-  formData,
-  currentRef,
-  handleChangeFile,
-  handleIconClick,
-  logoInputRef,
-  ceoSignatureInputRef,
-  certBarcodeInputRef,
-  mgrSignatureInputRef,
-  handleChangeText,
-  handleDownload,
-}) {
-  const [show, setShow] = useState(false);
+export default function InputComp() {
+  // const [show, setShow] = useState(false);
+  const {setFormData,
+    formData,
+    handleChangeFile,
+    handleIconClick,
+    logoInputRef,
+    ceoSignatureInputRef,
+    certBarcodeInputRef,
+    mgrSignatureInputRef,
+    handleChangeText,
+    handleDownloadToPrev} = useContext(MyContextData);
+
+  const navigate = useNavigate();
   const handlePreview = () => {
-    window.scrollTo(0, 0);
-    setShow(!show);
+    const { institutionName, certificationStatement, studentName, programStatement, dateOfIssue } = formData;
+
+    if (institutionName && certificationStatement && studentName && programStatement && dateOfIssue) {
+      navigate("/showPrev");
+    } else {
+      alert("Please fill in all required fields before previewing.");
+    }
   };
 
   return (
     <div>
       <div className="px-2 my-5 mx-auto py-5 shadow-lg p-3 bg-white max-w-[1100px] w-full">
-        <h1 className="mt-8 text-center text-orange-500 text-4xl font-bold">
+        <h1 className="mt-8 text-center text-orange-500 text-2xl md:text-4xl font-bold">
           CERTIFICATE APP DESIGN
         </h1>
         <div className=" px-4 md:px-10 py-10">
@@ -64,7 +71,7 @@ export default function InputComp({
                   type="number"
                   name="number"
                   placeholder="1"
-                  value='1'
+                  value="1"
                   onChange={(e) =>
                     setFormData({ ...formData, number: e.target.value })
                   }
@@ -218,16 +225,16 @@ export default function InputComp({
               </button>
               <button
                 className="bg-orange-500 rounded-lg px-6 py-2 border-2 text-white text-lg hover:bg-transparent hover:text-black"
-                onClick={handleDownload}
+                onClick={handleDownloadToPrev}
               >
                 Download
               </button>
             </div>
-            {show ? (
-              <PreviewUi formData={formData} currentRef={currentRef} />
+            {/* {show ? (
+              <PreviewUi  />
             ) : (
               ""
-            )}
+            )} */}
           </div>
         </div>
       </div>

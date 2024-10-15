@@ -1,9 +1,18 @@
-export default function PreviewUi({ currentRef, formData }) {
+import { useContext } from "react";
+import { MyContextData } from "../contextCom/page";
+import { useNavigate } from "react-router-dom";
+
+export default function PreviewUi( ) {
+  const {formData, currentRef,handleDownload} = useContext(MyContextData);
+  const navigator = useNavigate();
+  const handlePreview2 =()=>{
+    navigator('/')
+  }
   return (
     <div>
       {/* for the certificate  */}
       <div
-        className="my-20 bg-white border-2 px-6 shadow-inner  py-5"
+        className="my-16 mx-3 md:mx-[128px] bg-white border-2 px-6 shadow-inner  py-6"
         ref={currentRef}
       >
         <div className="">
@@ -12,17 +21,17 @@ export default function PreviewUi({ currentRef, formData }) {
               <img
                 src={formData.logo}
                 alt="logo"
-                className="mb-4 w-[80.7px] h-[89.34px]"
+                className="mb-4 w-[85.7px] h-[93.34px]"
               />
             </div>
           )}
           <h1
-            className="text-center font-bold  text-3xl md:text-8xl text-orange-500"
+            className="text-center font-bold  text-5xl md:text-8xl text-orange-500"
             // data-html2canvas-ignore
           >
             {formData.institutionName}
           </h1>
-          <h3 className="font-semibold text-4xl text-[#343533] mt-6 text-center">
+          <h3 className="font-semibold text-2xl md:text-4xl text-[#343533] mt-6 text-center">
             This is to certify that
           </h3>
 
@@ -54,13 +63,13 @@ export default function PreviewUi({ currentRef, formData }) {
               </div>
             )}
             {formData.certBarcode && (
-              <div className="flex  items-center text-center">
+              <div className="flex  items-center text-center md:flex-row flex-col">
                 <img
                   src={formData.certBarcode}
                   alt="Certificate Barcode"
                   className="w-[190px] h-auto"
                 />
-                <p className="text-start text-xs text-gray-600 pl-1  w-fit">
+                <p className="text-start text-xs text-gray-600 pl-[1px]  w-fit">
                   This certificate will be rendered invalid upon suspension,
                   cancellation, or revocation of accreditation. For the latest
                   accreditation status, please visit www.ibsc.com or contact
@@ -82,6 +91,20 @@ export default function PreviewUi({ currentRef, formData }) {
           </div>
         </div>
       </div>
+      <div className="mt-5  md:mx-[135px] mb-2 md:mb-8 flex items-center justify-between ">
+              <button
+                onClick={handlePreview2}
+                className="rounded-lg px-10 py-3 hover:text-white text-md border border-gray-500 hover:bg-orange-500 text-black"
+              >
+                Preview
+              </button>
+              <button
+                className="bg-orange-500 rounded-lg px-6 py-2 border-2 text-white text-lg hover:bg-transparent hover:text-black"
+                onClick={handleDownload}
+              >
+                Download
+              </button>
+            </div>
     </div>
   );
 }
